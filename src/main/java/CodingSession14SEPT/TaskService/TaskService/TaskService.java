@@ -1,10 +1,14 @@
-package CodingSession14SEPT.TaskService;
+package CodingSession14SEPT.TaskService.TaskService;
+
+import CodingSession14SEPT.TaskService.TaskModel.TaskModel;
+
+import java.util.List;
 
 public interface TaskService {
     List<TaskModel> getAllTasks();
     TaskModel createTask(TaskModel task);
-Long getTaskById(Long id)
-            TaskModel updateTask(Long id, TaskModel updatedTask);
-boolean deleteTask(Long id);
+    TaskModel getTaskById(Long id);
+    TaskModel updateTask(Long id, TaskModel updatedTask);
+    boolean deleteTask(Long id);
 
 }

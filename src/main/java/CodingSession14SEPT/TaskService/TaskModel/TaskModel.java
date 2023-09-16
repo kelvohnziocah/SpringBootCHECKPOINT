@@ -1,4 +1,4 @@
-package CodingSession14SEPT.TaskService;
+package CodingSession14SEPT.TaskService.TaskModel;
 
 public class TaskModel {
     private Long taskID;
@@ -33,5 +33,9 @@ public class TaskModel {
 
     public void setCompleted(boolean completed) {
         isCompleted = completed;
+    }
+
+    public static class TaskServiceImplent {
+
     }
 }

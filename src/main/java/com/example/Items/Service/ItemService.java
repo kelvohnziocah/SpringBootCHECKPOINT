@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
-public class ItemService implements Items {
+//@Service
+/*public class ItemService implements Items {
     private long itemIdCounter = 0L;
 
     public long getItemIdCounter() {
@@ -28,20 +28,26 @@ public class ItemService implements Items {
     @Override
     public Map<Long, String> getAllItems() {
         return items;
-    }
+    }/*
     @Override
     public String getItem(Long itemID){
         if (items.containsKey(itemID)) {
             return items.get(itemID);
-        } else {
-            throw new ItemNotFoundException("Item not found with ID: " + itemID);
-        }
     }
     @Override
     public Item addItem(Item item){
         Long id = itemIdCounter++;
         item.setItemID(id);
-        items.put(id, String.valueOf(item));
+        if(item.getItemID()<=0 ){
+            throw new IllegalArgumentException("Invalid ID, can't be less than 0");
+        }
+        if (item == null){
+            throw new IllegalArgumentException("Item cannot be null");
+        }
+        if (items.containsKey(item.getItemID())){
+            throw new IllegalArgumentException("Item already exist");
+        }
+        items.put(item.getItemID(), String.valueOf(item));
         return item;
     }
    @Override
@@ -63,4 +69,4 @@ public class ItemService implements Items {
             throw new ItemNotFoundException("Item not found with id " + itemID);
         }
     }
-    }
+    }*/
