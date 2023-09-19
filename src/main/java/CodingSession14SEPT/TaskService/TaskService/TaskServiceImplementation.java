@@ -14,7 +14,7 @@ public class TaskServiceImplementation implements TaskService{
    // List<TaskModel> tasks= new ArrayList<>();
     @Override
     public List<TaskModel> getAllTasks(){
-        return null;
+        return taskRepository.findAll();
     }
     @Override
     public TaskModel createTask(TaskModel task){
