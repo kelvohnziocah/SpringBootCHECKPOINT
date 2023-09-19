@@ -1,10 +1,9 @@
 package CodingSession14SEPT.TaskService.TaskController;
 
-import CodingSession14SEPT.TaskService.TaskModel.TaskModel;
+import CodingSession14SEPT.TaskService.Entity.TaskModel;
 import CodingSession14SEPT.TaskService.TaskService.TaskServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.config.Task;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,7 +51,7 @@ public class TaskController {
     public ResponseEntity<?> updateItem(@RequestBody Long id, TaskModel updatedTask){
         try {
             TaskModel taskModel = taskServiceImplementation.updateTask(id, updatedTask);
-            return ResponseEntity.ok("Task with task ID" + taskModel.getTaskID() + "updated successfully");
+            return ResponseEntity.ok("Task with task ID" + taskModel.getId() + "updated successfully");
         }catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

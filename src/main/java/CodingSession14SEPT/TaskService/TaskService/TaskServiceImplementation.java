@@ -1,20 +1,24 @@
 package CodingSession14SEPT.TaskService.TaskService;
 
-import CodingSession14SEPT.TaskService.TaskModel.TaskModel;
+import CodingSession14SEPT.TaskService.Entity.TaskModel;
+import CodingSession14SEPT.TaskService.TaskRespository.TaskRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 @Service
 public class TaskServiceImplementation implements TaskService{
-    List<TaskModel> tasks= new ArrayList<>();
+    @Autowired
+    TaskRepository taskRepository;
+   // List<TaskModel> tasks= new ArrayList<>();
     @Override
     public List<TaskModel> getAllTasks(){
-        return tasks;
+        return null;
     }
     @Override
     public TaskModel createTask(TaskModel task){
-        if(task.getTaskID()<=0 ){
+        if(task.getId()<=0 ){
             throw new IllegalArgumentException("ID should not be less or equal to zero");
         }
         if (task.getTaskTitle()==null || task.getTaskTitle().isBlank()){
@@ -23,7 +27,7 @@ public class TaskServiceImplementation implements TaskService{
         if (task == null){
             throw new IllegalArgumentException("Task cannot be null/blank");
         }
-        tasks.add(task);
+        taskRepository.save(task);
         return task;
     }
     @Override
@@ -31,20 +35,17 @@ public class TaskServiceImplementation implements TaskService{
         if (id == null){
             throw  new IllegalArgumentException("Task ID cannot be null");
         }
-        TaskModel taskModel = tasks.get(id.intValue());
-        return taskModel;
+        return taskRepository.getTaskById(id);
     }
     @Override
     public TaskModel updateTask(Long id, TaskModel updatedTask){
         // Use anyMatch to check if a task with the given ID exists
-        boolean taskExists = tasks.stream()
-                .anyMatch(task -> task.getTaskID().equals(id));
+        boolean taskExists = taskRepository.existsById(id);
         if (!taskExists) {
             throw new IllegalArgumentException("No task with the specified ID found.");
         }
-        tasks.removeIf(task -> task.getTaskID().equals(id));
-        tasks.add(updatedTask);
-        return updatedTask;
+        updatedTask.setId(id);
+        return taskRepository.save(updatedTask);
     }
     @Override
    public boolean deleteTask(Long id) {
@@ -52,13 +53,11 @@ public class TaskServiceImplementation implements TaskService{
             throw new IllegalArgumentException("Task ID should have a value");
         }
         // Use anyMatch to check if a task with the given ID exists
-        boolean taskExists = tasks.stream()
-                .anyMatch(task -> task.getTaskID().equals(id));
-        if (!taskExists) {
+        if (taskRepository.existsById(id)) {
+            taskRepository.deleteTask(id);
             return false;
         }
-        tasks.removeIf(task -> task.getTaskID().equals(id));
-        return true;
+        return false;
     }
 
 }

@@ -1,6 +1,6 @@
 package CodingSession14SEPT.TaskService.TaskService;
 
-import CodingSession14SEPT.TaskService.TaskModel.TaskModel;
+import CodingSession14SEPT.TaskService.Entity.TaskModel;
 
 import java.util.List;
 
