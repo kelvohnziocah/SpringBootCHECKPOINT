@@ -5,7 +5,10 @@ import jakarta.persistence.Id;
 import lombok.Data;
 @Entity
 @Data
-public class CheckpointModelEntity {
+public class Customer {
     @Id
     private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
 }
