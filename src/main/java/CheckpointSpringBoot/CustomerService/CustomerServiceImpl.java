@@ -24,13 +24,15 @@ public class CustomerServiceImpl implements CustmerService{
     @Override
     Customer getCustomerById(Long Id){
         if(customerRepository.existsById(Id)){
-            return
+            return customerRepository.getCustomerById(Id);
         }
 
-    }
     @Override
-    Customer updateCustomerById(Long Id){
-
+    Customer updateCustomerById(Long Id, Customer updatedCustomer){
+            if(customerRepository.existsById(Id)){
+                return customerRepository.save(updatedCustomer);
+            }
+        }
     }
     @Override
     boolean deleteCustomer(Long Id){
