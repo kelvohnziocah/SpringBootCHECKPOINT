@@ -34,7 +34,7 @@ public class CustomerController (CustomerServiceImpl customerServiceImpl){
     public ResponseEntity<?> createItem(@RequestBody TaskModel task) {
         try {
             Customer customer = customerServiceImpl.createTask(task);
-            return ResponseEntity.ok("task " + task.getTaskTitle() + " successfully created");
+            return ResponseEntity.ok("customer " + task.getTaskTitle() + " successfully created");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -52,7 +52,7 @@ public class CustomerController (CustomerServiceImpl customerServiceImpl){
     public ResponseEntity<?> updateItem(@RequestBody Long id, TaskModel updatedTask){
         try {
             Customer customer = customerServiceImpl.updateTask(id, updatedTask);
-            return ResponseEntity.ok("Task with task ID" + customer.getId() + "updated successfully");
+            return ResponseEntity.ok("customer with task ID" + customer.getId() + "updated successfully");
         }catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
