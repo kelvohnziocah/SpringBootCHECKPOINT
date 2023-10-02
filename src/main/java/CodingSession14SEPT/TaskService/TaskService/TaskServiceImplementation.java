@@ -5,7 +5,8 @@ import CodingSession14SEPT.TaskService.TaskRespository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 @Service
 public class TaskServiceImplementation implements TaskService{
@@ -27,6 +28,9 @@ public class TaskServiceImplementation implements TaskService{
         if (task == null){
             throw new IllegalArgumentException("Task cannot be null/blank");
         }
+        task.setCreatedOn(new Timestamp(new Date().getTime()));
+        task.setCreatedBy("KNS");
+        task.setDescription("");
         taskRepository.save(task);
         return task;
     }
@@ -34,6 +38,9 @@ public class TaskServiceImplementation implements TaskService{
     public TaskModel getTaskById(Long id){
         if (id == null){
             throw  new IllegalArgumentException("Task ID cannot be null");
+        }
+        if (!taskRepository.existsById(id)){
+            throw new IllegalArgumentException("No task with the specified ID found.");
         }
         return taskRepository.getTaskById(id);
     }
@@ -44,6 +51,8 @@ public class TaskServiceImplementation implements TaskService{
         if (!taskExists) {
             throw new IllegalArgumentException("No task with the specified ID found.");
         }
+        updatedTask.setUpdatedOn(new Timestamp(new Date().getTime()));
+        updatedTask.setUpdatedBy("KNS");
         updatedTask.setId(id);
         return taskRepository.save(updatedTask);
     }
@@ -54,7 +63,7 @@ public class TaskServiceImplementation implements TaskService{
         }
         // Use anyMatch to check if a task with the given ID exists
         if (taskRepository.existsById(id)) {
-            taskRepository.deleteTask(id);
+            taskRepository.deleteById(id);
             return false;
         }
         return false;

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@@RestController
-public class CustomerController (CustomerServiceImpl customerServiceImpl){
-    @Autowired
+@RestController
+public class CustomerController {
+   /* @Autowired
     private CustomerServiceImpl customerServiceImpl;
 
     @GetMapping("/tasks")
@@ -33,7 +33,7 @@ public class CustomerController (CustomerServiceImpl customerServiceImpl){
     @PostMapping("/tasks")
     public ResponseEntity<?> createItem(@RequestBody TaskModel task) {
         try {
-            Customer customer = customerServiceImpl.createTask(task);
+            Customer customer = customerServiceImpl.createCustomer();
             return ResponseEntity.ok("customer " + task.getTaskTitle() + " successfully created");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -42,7 +42,7 @@ public class CustomerController (CustomerServiceImpl customerServiceImpl){
     @DeleteMapping("/tasks/{id}")
     public ResponseEntity<?> deleteItem(@PathVariable("id") Long id){
         try {
-            boolean customer = customerServiceImpl.deleteTask(id);
+            boolean customer = customerServiceImpl.deleteCustomer(id);
             return ResponseEntity.ok(customer);
         }catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -51,11 +51,11 @@ public class CustomerController (CustomerServiceImpl customerServiceImpl){
     @PutMapping("/tasks/{id}")
     public ResponseEntity<?> updateItem(@RequestBody Long id, TaskModel updatedTask){
         try {
-            Customer customer = customerServiceImpl.updateTask(id, updatedTask);
+            Customer customer = customerServiceImpl.updateCustomer(id, updatedTask);
             return ResponseEntity.ok("customer with task ID" + customer.getId() + "updated successfully");
         }catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-    }
+    }*/
 
 }

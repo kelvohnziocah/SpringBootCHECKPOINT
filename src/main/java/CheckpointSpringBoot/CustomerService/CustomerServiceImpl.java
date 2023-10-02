@@ -8,15 +8,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CustomerServiceImpl implements CustmerService{
+public class CustomerServiceImpl /*implements CustmerService*/{
     @Autowired
     CustomerRepository customerRepository;
-    @Override
+  //  @Override
     public List <Customer> getAllCustomers(){
         return customerRepository.findAll();
 
     }
-    @Override
+   /* @Override
     Customer createCustomer(Customer customer){
         return customerRepository.save(customer);
 
@@ -37,5 +37,5 @@ public class CustomerServiceImpl implements CustmerService{
     @Override
     boolean deleteCustomer(Long Id){
 
-    }
+    }*/
 }
